@@ -1,5 +1,6 @@
 
 export default function About() {
+    throw new error('i make a error')
     return (
       <main className="">
         <div className="mt-10">
