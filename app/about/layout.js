@@ -7,7 +7,7 @@ function layout({ children }) {
             <nav>
                 <ul className="flex gap-6">
                     <li><Link href="/about/mission">Mission</Link></li>
-                    <li><Link href="/about/vission">vission</Link></li>
+                    <li><Link href="/about/vision">vision</Link></li>
                 </ul>
             </nav>
             {children}
