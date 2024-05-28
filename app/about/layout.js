@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 
+export const metadata = {
+    title: 'about',
+    description: 'this is about data',
+  }
+
 function layout({ children }) {
     return (
         <div className='mt-6'>
