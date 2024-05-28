@@ -1,6 +1,7 @@
+import Comments from '@/app/components/comments';
 import getPost from '@/lib/getPost';
 import getPostComments from '@/lib/getPostComments';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export const generateMetadata = async ({ params }) => { // dynamic meta data
     const { id } = params;
@@ -15,9 +16,9 @@ export const generateMetadata = async ({ params }) => { // dynamic meta data
 
 const page = async ({ params }) => {
     const { id } = params;
-    const postPromise = getPost(id);
+    const post = await getPost(id);
     const commentsPromise = getPostComments(id)
-    const [post, comments] = await Promise.all([postPromise, commentsPromise])
+    // const [post, comments] = await Promise.all([postPromise, commentsPromise]) // this is not efficient
 
     return (
         <>
@@ -25,13 +26,9 @@ const page = async ({ params }) => {
                 <h1 className='text-2xl'>{post.title}</h1>
                 <p className='mt-3'>{post.body}</p>
             </div>
-            <div className='mt-10'>
-                <ul>
-                    {
-                        comments.map(commnet => <li className='mt-6' key={commnet.id}>{commnet.body}</li>)
-                    }
-                </ul>
-            </div>
+            <Suspense fallback="<h1>comments are loading</h1>">
+                <Comments promise={commentsPromise} />
+            </Suspense>
         </>
     );
 };
