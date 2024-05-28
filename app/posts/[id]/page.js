@@ -15,7 +15,7 @@ export const generateMetadata = async ({ params }) => { // dynamic meta data
     }
 }
 
-export async function page({ params }) {
+export default async function page({ params }) {
     const { id } = params;
     const post = await getPost(id);
     const commentsPromise = getPostComments(id)
