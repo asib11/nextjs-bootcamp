@@ -15,7 +15,7 @@ export const generateMetadata = async ({ params }) => { // dynamic meta data
     }
 }
 
-const page = async ({ params }) => {
+export async function page({ params }) {
     const { id } = params;
     const post = await getPost(id);
     const commentsPromise = getPostComments(id)
@@ -34,9 +34,13 @@ const page = async ({ params }) => {
     );
 };
 
-export default page;
+
 
 export async function generateStaticParams() {
     const posts = await getAllData();
-    return posts.map(post => ({ id: post.id.toString() },))
+    return posts.map(post => (
+            { 
+                id: post.id.toString(),
+            }
+    ));
 };
